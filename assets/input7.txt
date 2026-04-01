@@ -1,0 +1,8 @@
+5
+r 6
+s 2
+t 4
+u 1
+v 8
+vrstvurvtsrutvrsuvtrvstuvrstuvrst
+tuvrsuvtrsvutrvstuvrsuvtrsvutrvst
