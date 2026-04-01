@@ -1,7 +1,0 @@
-4
-m 5
-n 3
-o 8
-p 1
-omponmpomnopmnopmnopmopnmopomno
-nopmopmnopmopnmonopmopmnopmopnm
