@@ -10,9 +10,8 @@ run: ARGS = $(filter-out $@,$(MAKECMDGOALS))
 run:
 	./.venv/bin/python src/main.py $(ARGS)
 
-run-uv: ARGS = $(filter-out $@,$(MAKECMDGOALS))
 run-uv:
-	uv run src/main.py $(ARGS)
+	uv run src/main.py $(filter-out $@,$(MAKECMDGOALS))
 
 init:
 	python -m venv .venv
