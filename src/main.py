@@ -1,8 +1,10 @@
-# TODO: add way to pick file like in past assignments
+import argparse
+import os
 import time
 import matplotlib.pyplot as plt
 
 start = time.time()
+
 
 def read_input_from_file(filepath):  # read input helper function
     with open(filepath, "r") as f:
@@ -27,7 +29,17 @@ def read_input_from_file(filepath):  # read input helper function
 
 
 def main():
-    K, char_values, A, B = read_input_from_file("assets/input10.txt")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("filepath", nargs="?", default="assets/example_input.txt")
+    args = parser.parse_args()
+
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    graph_path = os.path.join(project_root, "assets", "runtime_graph.png")
+    if not os.path.isabs(args.filepath):
+        args.filepath = os.path.join(project_root, args.filepath)
+
+    K, char_values, A, B = read_input_from_file(args.filepath)
     # print(f"K = {K}")
     # print(f"char_values = {char_values}")
     # print(f"A = {A}")
@@ -35,7 +47,8 @@ def main():
     calculate(K, char_values, A, B)
     end = time.time()
     print(f"Runtime: {end - start:.6f} seconds")
-    graph()
+    graph(graph_path)
+
 
 def calculate(K, char_values, A, B):
     n = len(A)
@@ -74,20 +87,32 @@ def calculate(K, char_values, A, B):
     print(dp[n][m])
     print(str("".join(result)))
 
-def graph():
+
+def graph(graph_path):
     input_files = [f"input{i}.txt" for i in range(1, 11)]
-    runtimes = [0.000164, 0.000168, 0.000195, 0.000199, 0.000191,
-                0.0002, 0.000219, 0.000250, 0.000244, 0.000363]
+    runtimes = [
+        0.000164,
+        0.000168,
+        0.000195,
+        0.000199,
+        0.000191,
+        0.0002,
+        0.000219,
+        0.000250,
+        0.000244,
+        0.000363,
+    ]
     plt.figure(figsize=(10, 5))
-    plt.plot(input_files, runtimes, marker='o', color='blue', linewidth=2)
+    plt.plot(input_files, runtimes, marker="o", color="blue", linewidth=2)
     # labels
     plt.xlabel("Input File")
     plt.ylabel("Runtime (seconds)")
     plt.title("HVLCS Runtime Across 10 Input Files")
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.savefig("assets/runtime_graph.png")
+    plt.savefig(graph_path)
     plt.show()
+
 
 if __name__ == "__main__":
     main()
