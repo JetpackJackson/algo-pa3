@@ -1,5 +1,8 @@
 # TODO: add way to pick file like in past assignments
+import time
+import matplotlib.pyplot as plt
 
+start = time.time()
 
 def read_input_from_file(filepath):  # read input helper function
     with open(filepath, "r") as f:
@@ -24,13 +27,15 @@ def read_input_from_file(filepath):  # read input helper function
 
 
 def main():
-    K, char_values, A, B = read_input_from_file("assets/input1.txt")
-    print(f"K = {K}")
-    print(f"char_values = {char_values}")
-    print(f"A = {A}")
-    print(f"B = {B}")
+    K, char_values, A, B = read_input_from_file("assets/input10.txt")
+    # print(f"K = {K}")
+    # print(f"char_values = {char_values}")
+    # print(f"A = {A}")
+    # print(f"B = {B}")
     calculate(K, char_values, A, B)
-
+    end = time.time()
+    print(f"Runtime: {end - start:.6f} seconds")
+    graph()
 
 def calculate(K, char_values, A, B):
     n = len(A)
@@ -69,6 +74,20 @@ def calculate(K, char_values, A, B):
     print(dp[n][m])
     print(str("".join(result)))
 
+def graph():
+    input_files = [f"input{i}.txt" for i in range(1, 11)]
+    runtimes = [0.000164, 0.000168, 0.000195, 0.000199, 0.000191,
+                0.0002, 0.000219, 0.000250, 0.000244, 0.000363]
+    plt.figure(figsize=(10, 5))
+    plt.plot(input_files, runtimes, marker='o', color='blue', linewidth=2)
+    # labels
+    plt.xlabel("Input File")
+    plt.ylabel("Runtime (seconds)")
+    plt.title("HVLCS Runtime Across 10 Input Files")
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig("assets/runtime_graph.png")
+    plt.show()
 
 if __name__ == "__main__":
     main()

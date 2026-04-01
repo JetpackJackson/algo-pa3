@@ -23,7 +23,7 @@ papersize: letter
 # Written Component
 
 1)
-(put in answer)
+the 10 input files along with the graph is inside the src/assets folder.
 
 
 2) 
@@ -48,3 +48,6 @@ c) since there are no matches, the program must skip one char or the other. This
 <br>
 the use of 'max' gives each subproblem in OPT the max (and therefore best) possible value for the matchings between A and B. 
 Building and reusing these optimized subproblems will give the global optimal solution.
+
+
+3)
