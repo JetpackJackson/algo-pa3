@@ -17,4 +17,7 @@ init:
 	python -m venv .venv
 
 doc:
-	pandoc -N README.md -o README.pdf --pdf-engine lualatex
+	# pandoc -N README.md -o README.pdf --pdf-engine lualatex
+	pandoc -F pandoc-minted -s README.md -o README.tex
+	lualatex -shell-escape README.tex
+
